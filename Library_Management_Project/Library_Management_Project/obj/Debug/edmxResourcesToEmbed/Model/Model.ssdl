@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuanLiThuVienModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CTPhieuMuon">
+    <Key>
+      <PropertyRef Name="IdPhieuMuon" />
+      <PropertyRef Name="IdSach" />
+    </Key>
+    <Property Name="IdPhieuMuon" Type="int" Nullable="false" />
+    <Property Name="IdSach" Type="int" Nullable="false" />
+    <Property Name="NgayTra" Type="date" />
+    <Property Name="BiMat" Type="bit" />
+    <Property Name="TienPhat" Type="int" />
+    <Property Name="GhiChu" Type="nvarchar" MaxLength="300" />
+    <Property Name="BiAn" Type="bit" />
+  </EntityType>
+  <EntityType Name="DocGia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdLoai" Type="int" />
+    <Property Name="NgaySinh" Type="date" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="NgayLap" Type="date" />
+    <Property Name="BiAn" Type="bit" />
+  </EntityType>
+  <EntityType Name="LoaiDocGia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+    <Property Name="BiAn" Type="bit" />
+  </EntityType>
+  <EntityType Name="LoaiSach">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+    <Property Name="BiAn" Type="bit" />
+  </EntityType>
+  <EntityType Name="PhieuMuon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdDocGia" Type="int" />
+    <Property Name="NgayMuon" Type="date" />
+    <Property Name="BiAn" Type="bit" />
+  </EntityType>
+  <EntityType Name="QuyDinh">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TuoiToiThieuDG" Type="int" />
+    <Property Name="TuoiToiDaDG" Type="int" />
+    <Property Name="KhoangNamXBSach" Type="int" />
+    <Property Name="SLSachMuonToiDa" Type="int" />
+    <Property Name="SoNgayMuonToiDa" Type="int" />
+    <Property Name="TienPhatTreSach_Ngay" Type="int" />
+    <Property Name="PhanTramGiaSach" Type="int" />
+    <Property Name="ChiPhiSachMat" Type="int" />
+  </EntityType>
+  <EntityType Name="Sach">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdLoai" Type="int" />
+    <Property Name="TacGia" Type="nvarchar" MaxLength="50" />
+    <Property Name="NamXB" Type="int" />
+    <Property Name="NhaXB" Type="nvarchar" MaxLength="50" />
+    <Property Name="NgayNhap" Type="date" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="Gia" Type="int" />
+    <Property Name="BiAn" Type="bit" />
+  </EntityType>
+  <Association Name="FK_CTPM_PHIEUMUON">
+    <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="1" />
+    <End Role="CTPhieuMuon" Type="Self.CTPhieuMuon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhieuMuon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CTPhieuMuon">
+        <PropertyRef Name="IdPhieuMuon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPM_SACH">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
+    <End Role="CTPhieuMuon" Type="Self.CTPhieuMuon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CTPhieuMuon">
+        <PropertyRef Name="IdSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DG_LOAI">
+    <End Role="LoaiDocGia" Type="Self.LoaiDocGia" Multiplicity="0..1" />
+    <End Role="DocGia" Type="Self.DocGia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiDocGia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DocGia">
+        <PropertyRef Name="IdLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PM_SACH">
+    <End Role="DocGia" Type="Self.DocGia" Multiplicity="0..1" />
+    <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocGia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhieuMuon">
+        <PropertyRef Name="IdDocGia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SACH_LOAI">
+    <End Role="LoaiSach" Type="Self.LoaiSach" Multiplicity="0..1" />
+    <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiSach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="IdLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QuanLiThuVienModelStoreContainer">
+    <EntitySet Name="CTPhieuMuon" EntityType="Self.CTPhieuMuon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DocGia" EntityType="Self.DocGia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoaiDocGia" EntityType="Self.LoaiDocGia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoaiSach" EntityType="Self.LoaiSach" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhieuMuon" EntityType="Self.PhieuMuon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuyDinh" EntityType="Self.QuyDinh" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sach" EntityType="Self.Sach" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CTPM_PHIEUMUON" Association="Self.FK_CTPM_PHIEUMUON">
+      <End Role="PhieuMuon" EntitySet="PhieuMuon" />
+      <End Role="CTPhieuMuon" EntitySet="CTPhieuMuon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPM_SACH" Association="Self.FK_CTPM_SACH">
+      <End Role="Sach" EntitySet="Sach" />
+      <End Role="CTPhieuMuon" EntitySet="CTPhieuMuon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DG_LOAI" Association="Self.FK_DG_LOAI">
+      <End Role="LoaiDocGia" EntitySet="LoaiDocGia" />
+      <End Role="DocGia" EntitySet="DocGia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PM_SACH" Association="Self.FK_PM_SACH">
+      <End Role="DocGia" EntitySet="DocGia" />
+      <End Role="PhieuMuon" EntitySet="PhieuMuon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SACH_LOAI" Association="Self.FK_SACH_LOAI">
+      <End Role="LoaiSach" EntitySet="LoaiSach" />
+      <End Role="Sach" EntitySet="Sach" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

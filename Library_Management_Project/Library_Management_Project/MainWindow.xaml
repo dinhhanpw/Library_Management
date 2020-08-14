@@ -4,9 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library_Management_Project"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:viewModel="clr-namespace:Library_Management_Project.ViewModel"
+        xmlns:view="clr-namespace:Library_Management_Project.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Quản Lí Thư Viện" Height="450" Width="800">
+    <Window.Resources>
+        <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
+
+        <Style TargetType="telerik:RadNavigationViewItem" 
+               BasedOn="{StaticResource RadNavigationViewItemStyle}" >
+            <Setter Property="Content" Value="{Binding Title}" />
+            <Setter Property="Icon" Value="{Binding IconGlyph}" />
+            <Setter Property="IconTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <telerik:RadGlyph Glyph="{Binding Converter={StaticResource StringToGlyphConverter}}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate DataType="{x:Type viewModel:ReaderViewModel}">
+            <view:ReaderManagementView/>
+        </DataTemplate>
+
+       
+
+    </Window.Resources>
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <telerik:RadNavigationView ItemsSource="{Binding Items}" SelectedIndex="0"
+                                   Content="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem.ViewContent}"/>
+
     </Grid>
 </Window>

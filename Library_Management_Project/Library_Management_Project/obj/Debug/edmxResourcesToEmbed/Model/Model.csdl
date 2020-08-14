@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuanLiThuVienModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CTPhieuMuon">
+    <Key>
+      <PropertyRef Name="IdPhieuMuon" />
+      <PropertyRef Name="IdSach" />
+    </Key>
+    <Property Name="IdPhieuMuon" Type="Int32" Nullable="false" />
+    <Property Name="IdSach" Type="Int32" Nullable="false" />
+    <Property Name="NgayTra" Type="DateTime" Precision="0" />
+    <Property Name="BiMat" Type="Boolean" />
+    <Property Name="TienPhat" Type="Int32" />
+    <Property Name="GhiChu" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="BiAn" Type="Boolean" />
+    <NavigationProperty Name="PhieuMuon" Relationship="Self.FK_CTPM_PHIEUMUON" FromRole="CTPhieuMuon" ToRole="PhieuMuon" />
+    <NavigationProperty Name="Sach" Relationship="Self.FK_CTPM_SACH" FromRole="CTPhieuMuon" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="DocGia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdLoai" Type="Int32" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NgayLap" Type="DateTime" Precision="0" />
+    <Property Name="BiAn" Type="Boolean" />
+    <NavigationProperty Name="LoaiDocGia" Relationship="Self.FK_DG_LOAI" FromRole="DocGia" ToRole="LoaiDocGia" />
+    <NavigationProperty Name="PhieuMuons" Relationship="Self.FK_PM_SACH" FromRole="DocGia" ToRole="PhieuMuon" />
+  </EntityType>
+  <EntityType Name="LoaiDocGia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BiAn" Type="Boolean" />
+    <NavigationProperty Name="DocGias" Relationship="Self.FK_DG_LOAI" FromRole="LoaiDocGia" ToRole="DocGia" />
+  </EntityType>
+  <EntityType Name="LoaiSach">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BiAn" Type="Boolean" />
+    <NavigationProperty Name="Saches" Relationship="Self.FK_SACH_LOAI" FromRole="LoaiSach" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="PhieuMuon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdDocGia" Type="Int32" />
+    <Property Name="NgayMuon" Type="DateTime" Precision="0" />
+    <Property Name="BiAn" Type="Boolean" />
+    <NavigationProperty Name="CTPhieuMuons" Relationship="Self.FK_CTPM_PHIEUMUON" FromRole="PhieuMuon" ToRole="CTPhieuMuon" />
+    <NavigationProperty Name="DocGia" Relationship="Self.FK_PM_SACH" FromRole="PhieuMuon" ToRole="DocGia" />
+  </EntityType>
+  <EntityType Name="QuyDinh">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TuoiToiThieuDG" Type="Int32" />
+    <Property Name="TuoiToiDaDG" Type="Int32" />
+    <Property Name="KhoangNamXBSach" Type="Int32" />
+    <Property Name="SLSachMuonToiDa" Type="Int32" />
+    <Property Name="SoNgayMuonToiDa" Type="Int32" />
+    <Property Name="TienPhatTreSach_Ngay" Type="Int32" />
+    <Property Name="PhanTramGiaSach" Type="Int32" />
+    <Property Name="ChiPhiSachMat" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Sach">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdLoai" Type="Int32" />
+    <Property Name="TacGia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NamXB" Type="Int32" />
+    <Property Name="NhaXB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NgayNhap" Type="DateTime" Precision="0" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="Gia" Type="Int32" />
+    <Property Name="BiAn" Type="Boolean" />
+    <NavigationProperty Name="CTPhieuMuons" Relationship="Self.FK_CTPM_SACH" FromRole="Sach" ToRole="CTPhieuMuon" />
+    <NavigationProperty Name="LoaiSach" Relationship="Self.FK_SACH_LOAI" FromRole="Sach" ToRole="LoaiSach" />
+  </EntityType>
+  <Association Name="FK_CTPM_PHIEUMUON">
+    <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="1" />
+    <End Role="CTPhieuMuon" Type="Self.CTPhieuMuon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhieuMuon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CTPhieuMuon">
+        <PropertyRef Name="IdPhieuMuon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPM_SACH">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
+    <End Role="CTPhieuMuon" Type="Self.CTPhieuMuon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CTPhieuMuon">
+        <PropertyRef Name="IdSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DG_LOAI">
+    <End Role="LoaiDocGia" Type="Self.LoaiDocGia" Multiplicity="0..1" />
+    <End Role="DocGia" Type="Self.DocGia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiDocGia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DocGia">
+        <PropertyRef Name="IdLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PM_SACH">
+    <End Role="DocGia" Type="Self.DocGia" Multiplicity="0..1" />
+    <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocGia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhieuMuon">
+        <PropertyRef Name="IdDocGia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SACH_LOAI">
+    <End Role="LoaiSach" Type="Self.LoaiSach" Multiplicity="0..1" />
+    <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiSach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="IdLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QuanLiThuVienEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CTPhieuMuons" EntityType="Self.CTPhieuMuon" />
+    <EntitySet Name="DocGias" EntityType="Self.DocGia" />
+    <EntitySet Name="LoaiDocGias" EntityType="Self.LoaiDocGia" />
+    <EntitySet Name="LoaiSaches" EntityType="Self.LoaiSach" />
+    <EntitySet Name="PhieuMuons" EntityType="Self.PhieuMuon" />
+    <EntitySet Name="QuyDinhs" EntityType="Self.QuyDinh" />
+    <EntitySet Name="Saches" EntityType="Self.Sach" />
+    <AssociationSet Name="FK_CTPM_PHIEUMUON" Association="Self.FK_CTPM_PHIEUMUON">
+      <End Role="PhieuMuon" EntitySet="PhieuMuons" />
+      <End Role="CTPhieuMuon" EntitySet="CTPhieuMuons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPM_SACH" Association="Self.FK_CTPM_SACH">
+      <End Role="Sach" EntitySet="Saches" />
+      <End Role="CTPhieuMuon" EntitySet="CTPhieuMuons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DG_LOAI" Association="Self.FK_DG_LOAI">
+      <End Role="LoaiDocGia" EntitySet="LoaiDocGias" />
+      <End Role="DocGia" EntitySet="DocGias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PM_SACH" Association="Self.FK_PM_SACH">
+      <End Role="DocGia" EntitySet="DocGias" />
+      <End Role="PhieuMuon" EntitySet="PhieuMuons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SACH_LOAI" Association="Self.FK_SACH_LOAI">
+      <End Role="LoaiSach" EntitySet="LoaiSaches" />
+      <End Role="Sach" EntitySet="Saches" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
