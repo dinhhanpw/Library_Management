@@ -34,6 +34,8 @@ namespace Library_Management_Project.ViewModel
         public ObservableCollection<DocGia> Readers { get; set; }
 
         public ICommand AddCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+
         //public ICommand Add_EditOnTableDataCommand { get; set; }
 
 
@@ -46,8 +48,38 @@ namespace Library_Management_Project.ViewModel
             Holder = new DocGia();
             Holder.IdLoai = ReaderTypes[0].Id;
             AddCommand = new RelayCommand<DocGia>(CanAdd, OnAdd);
+            EditCommand = new RelayCommand<DocGia>(CanEdit, OnEdit);
+
             //Add_EditOnTableDataCommand = new RelayCommand<GridViewRowEditEndedEventArgs>(argument => argument != null, OnAdd_Edit);
             //Holder.LoaiDocGia = new LoaiDocGia();
+        }
+
+        /// <summary>
+        /// chỉnh sửa thông tin thẻ đọc giả
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnEdit(DocGia obj)
+        {
+            // sao chép thông tin
+            SelectedReader.Ten = Holder.Ten;
+            SelectedReader.NgaySinh = Holder.NgaySinh;
+            SelectedReader.IdLoai = Holder.IdLoai;
+            SelectedReader.NgayLap = Holder.NgayLap;
+            SelectedReader.Email = Holder.Email;
+            SelectedReader.DiaChi = Holder.DiaChi;
+
+            DataProvider.Instance.DataBase.SaveChanges();
+
+        }
+
+        /// <summary>
+        /// kiểm tra những điều kiện để cho phép chỉnh sửa thông tin thẻ đọc giả
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private bool CanEdit(DocGia obj)
+        {
+            return selectedReader != null && !Holder.HasErrors;
         }
 
         /// <summary>
@@ -100,7 +132,7 @@ namespace Library_Management_Project.ViewModel
         }
 
         /// <summary>
-        /// kiểm tra những điều kiện để cho phép thêm đọc giả
+        /// kiểm tra những điều kiện để cho phép thêm thông tin thẻ đọc giả
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
