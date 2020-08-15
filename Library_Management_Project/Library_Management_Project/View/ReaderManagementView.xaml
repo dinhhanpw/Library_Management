@@ -190,13 +190,13 @@
             <telerik:EventToCommandBehavior.EventBindings>
                 <telerik:EventBinding EventName="RowEditEnded" 
                                       PassEventArgsToCommand="True"
-                                      Command="{Binding EditOnTableDataCommand}"/>
+                                      Command="{Binding Add_EditOnTableDataCommand}"/>
             </telerik:EventToCommandBehavior.EventBindings>
 
             <telerik:RadGridView.Columns>
                 <telerik:GridViewSelectColumn />
 
-                <telerik:GridViewDataColumn Header="Họ Tên" Width="*" IsReadOnly="True"
+                <telerik:GridViewDataColumn Header="Họ Tên" Width="*"
                                             DataMemberBinding="{Binding Ten, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <telerik:GridViewComboBoxColumn Header="Loại" ItemsSource="{Binding ReaderTypes}"

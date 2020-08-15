@@ -22,10 +22,10 @@ namespace Library_Management_Project.Helper
             Books = new ObservableCollection<Sach>(DataBase.Saches.Where(book => book.BiAn == false));
             ReaderTypes = new ObservableCollection<LoaiDocGia>(DataBase.LoaiDocGias.Where(type => type.BiAn == false));
             BookType = new ObservableCollection<LoaiSach>(DataBase.LoaiSaches.Where(type => type.BiAn == false));
-            //Rule = DataBase.QuyDinhs.First();
         }
 
-        public static DataProvider Instance {
+        public static DataProvider Instance
+        {
             get
             {
                 if (instance == null)

@@ -79,6 +79,7 @@
     <Compile Include="Helper\CustomLocalizationManager.cs" />
     <Compile Include="Helper\DataProvider.cs" />
     <Compile Include="Helper\NavigationItem.cs" />
+    <Compile Include="Helper\RelayCommand.cs" />
     <Compile Include="Helper\ValidatableBase.cs" />
     <Compile Include="Helper\Validator\ReaderValidator.cs" />
     <Compile Include="Helper\Validator\ValidationHelper.cs" />
