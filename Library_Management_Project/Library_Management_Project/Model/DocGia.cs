@@ -9,24 +9,79 @@
 
 namespace Library_Management_Project.Model
 {
+    using Library_Management_Project.Helper;
+    using Library_Management_Project.Helper.Validator;
     using System;
     using System.Collections.Generic;
     
-    public partial class DocGia
+    public partial class DocGia : ValidatableBase<DocGia>
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+
+        private string ten;
+        private int? idLoai;
+        private DateTime? ngaySinh;
+        private string diachi;
+        private string email;
+        private DateTime? ngayLap;
+
         public DocGia()
         {
             this.PhieuMuons = new HashSet<PhieuMuon>();
+
+            List<string> emptyList = new List<string>();
+            errors[nameof(Ten)] = emptyList;
+            errors[nameof(DiaChi)] = emptyList;
+            errors[nameof(Email)] = emptyList;
         }
     
+        static DocGia()
+        {
+            validator = new ReaderValidator();
+        }
+
         public int Id { get; set; }
-        public string Ten { get; set; }
-        public Nullable<int> IdLoai { get; set; }
-        public Nullable<System.DateTime> NgaySinh { get; set; }
-        public string DiaChi { get; set; }
-        public string Email { get; set; }
-        public Nullable<System.DateTime> NgayLap { get; set; }
+        public string Ten
+        {
+            get { return ten; }
+            set { SetValidatableProperty(ref ten, value, this); }
+        }
+
+        public Nullable<int> IdLoai
+        {
+            get { return idLoai; }
+            set { SetBindableProperty(ref idLoai, value); }
+        }
+
+        public Nullable<DateTime> NgaySinh {
+            get { return ngaySinh; }
+            set
+            {
+                SetValidatableProperty(ref ngaySinh, value, this);
+                RaiseErrorChangedOnProperty("NgayLap", this);
+            }
+        }
+
+        public string DiaChi
+        {
+            get { return diachi; }
+            set { SetValidatableProperty(ref diachi, value, this); }
+        }
+
+        public string Email {
+            get { return email; }
+            set { SetValidatableProperty(ref email, value, this); }
+        }
+
+        public Nullable<DateTime> NgayLap {
+            get { return ngayLap; }
+            set
+            {
+                SetValidatableProperty(ref ngayLap, value, this);
+                RaiseErrorChangedOnProperty("NgaySinh", this);
+            }
+        }
+
         public Nullable<bool> BiAn { get; set; }
     
         public virtual LoaiDocGia LoaiDocGia { get; set; }

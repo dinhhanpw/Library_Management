@@ -8,7 +8,7 @@
         xmlns:viewModel="clr-namespace:Library_Management_Project.ViewModel"
         xmlns:view="clr-namespace:Library_Management_Project.View"
         mc:Ignorable="d"
-        Title="Quản Lí Thư Viện" Height="450" Width="800">
+        Title="Quản Lí Thư Viện" Height="600" Width="1000">
     <Window.Resources>
         <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
 

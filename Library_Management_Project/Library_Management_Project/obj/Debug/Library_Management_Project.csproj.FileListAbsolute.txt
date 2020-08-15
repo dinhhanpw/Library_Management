@@ -41,3 +41,5 @@ D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\bin\Debug\Telerik.Windows.Themes.Windows8.dll
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\App.baml
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\MainResource.baml
+D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\bin\Debug\FluentValidation.dll
+D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\bin\Debug\FluentValidation.xml

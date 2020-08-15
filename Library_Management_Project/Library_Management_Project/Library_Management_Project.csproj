@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.9.1.2\lib\net461\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -72,8 +75,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helper\BindableBase.cs" />
     <Compile Include="Helper\CustomLocalizationManager.cs" />
+    <Compile Include="Helper\DataProvider.cs" />
     <Compile Include="Helper\NavigationItem.cs" />
+    <Compile Include="Helper\ValidatableBase.cs" />
+    <Compile Include="Helper\Validator\ReaderValidator.cs" />
+    <Compile Include="Helper\Validator\ValidationHelper.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ReaderViewModel.cs" />
     <Compile Include="View\ReaderManagementView.xaml.cs">
