@@ -2,6 +2,7 @@
 using Library_Management_Project.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Controls.GridView;
@@ -35,6 +36,7 @@ namespace Library_Management_Project.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         //public ICommand Add_EditOnTableDataCommand { get; set; }
 
@@ -49,9 +51,69 @@ namespace Library_Management_Project.ViewModel
             Holder.IdLoai = ReaderTypes[0].Id;
             AddCommand = new RelayCommand<DocGia>(CanAdd, OnAdd);
             EditCommand = new RelayCommand<DocGia>(CanEdit, OnEdit);
-
+            DeleteCommand = new RelayCommand<DocGia>(CanDelete, OnDelete);
             //Add_EditOnTableDataCommand = new RelayCommand<GridViewRowEditEndedEventArgs>(argument => argument != null, OnAdd_Edit);
             //Holder.LoaiDocGia = new LoaiDocGia();
+        }
+
+        /// <summary>
+        /// xóa thông tin đọc giả khỏi danh sách
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnDelete(DocGia obj)
+        {
+            // hiển thị thông báo để xác nhận xóa
+            MessageBoxResult result = 
+                MessageBox.Show("Các thông tin liên quan đến đọc giả này cũng sẽ bị xóa, bạn có chấp nhận?", 
+                "Xóa Thông Tin Đọc Giả", 
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                
+                ObservableCollection<CTPhieuMuon> ReceiptInfos = DataProvider.Instance.BorrowReceiptInfos;
+                ObservableCollection<PhieuMuon> Receipts = DataProvider.Instance.BorrowReceipts;
+
+                
+                foreach (PhieuMuon receipt in SelectedReader.PhieuMuons)
+                {
+                    foreach(CTPhieuMuon receiptInfo in receipt.CTPhieuMuons)
+                    {
+                        // ẩn thông tin sách mượn
+                        receiptInfo.BiAn = true;
+                        ReceiptInfos.Remove(receiptInfo);
+                    }
+
+                    // ẩn thông tin các phiếu mượn
+                    receipt.BiAn = true;
+                    Receipts.Remove(receipt);
+                }
+
+                // ẩn thông tin đọc giả
+                SelectedReader.BiAn = true;
+                Readers.Remove(SelectedReader);
+                // lưu các thay đổi
+                DataProvider.Instance.DataBase.SaveChanges();
+                //foreach (CTPhieuMuon receiptInfo in ReceiptInfos)
+                //{
+                //    if (receiptInfo.IdDocGia == SelectedReader.Id)
+                //    {
+                //        receiptInfo.BiAn = true;
+                //        Receipts.Remove(receiptInfo);
+                //    }
+
+                //}
+            }
+        }
+
+        /// <summary>
+        /// kiểm tra những điều kiện để cho phép xóa thông tin thẻ đọc giả
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private bool CanDelete(DocGia obj)
+        {
+            return SelectedReader != null;
         }
 
         /// <summary>
