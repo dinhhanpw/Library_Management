@@ -264,7 +264,7 @@ namespace Library_Management_Project.ViewModel
         private void OnAdd(DocGia obj)
         {
             // tạo một đọc giả mới với thông tin từ biểu mẫu
-            DocGia docGia = new DocGia()
+            DocGia reader = new DocGia()
             {
                 Ten = Holder.Ten,
                 IdLoai = Holder.IdLoai,
@@ -275,10 +275,10 @@ namespace Library_Management_Project.ViewModel
             };
 
             // thêm vào cơ sở dữ liệu
-            DataProvider.Instance.DataBase.DocGias.Add(docGia);
+            DataProvider.Instance.DataBase.DocGias.Add(reader);
             DataProvider.Instance.DataBase.SaveChanges();
             // thêm vào danh sách đọc giả
-            Readers.Add(docGia);
+            Readers.Add(reader);
         }
 
         /// <summary>

@@ -50,7 +50,43 @@ namespace Library_Management_Project.ViewModel
             BookTypes = DataProvider.Instance.BookTypes;
             Holder = new Sach();
             Holder.IdLoai = BookTypes[0].Id;
+            AddCommand = new RelayCommand<Sach>(CanAdd, OnAdd);
         }
 
+        /// <summary>
+        /// thêm thông tin sách
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnAdd(Sach obj)
+        {
+            // tạo một sách mới với thông tin từ biểu mẫu
+            Sach book = new Sach()
+            {
+                Ten = Holder.Ten,
+                IdLoai = Holder.IdLoai,
+                NgayNhap = Holder.NgayNhap,
+                TacGia = Holder.TacGia,
+                NhaXB = Holder.NhaXB,
+                NamXB = Holder.NamXB,
+                SoLuong = Holder.SoLuong,
+                Gia = Holder.Gia,
+            };
+
+            // thêm vào cơ sở dữ liệu
+            DataProvider.Instance.DataBase.Saches.Add(book);
+            DataProvider.Instance.DataBase.SaveChanges();
+            // thêm vào danh sách
+            Books.Add(book);
+        }
+
+        /// <summary>
+        /// kiểm tra những điều kiện để cho phép thêm thông tin sách
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private bool CanAdd(Sach obj)
+        {
+            return Holder != null && !Holder.HasErrors;
+        }
     }
 }

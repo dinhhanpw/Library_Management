@@ -144,7 +144,8 @@
                 <TextBlock Grid.Column="2" Grid.Row="2" Text="Giá sách"/>
                 <telerik:RadMaskedCurrencyInput Grid.Column="3" Grid.Row="2"
                                                 Mask="#8.0" TextMode="PlainText"
-                                                Value="{Binding Gia}"
+                                                Value="{Binding Gia, Mode=TwoWay,
+                    UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
                                                 EmptyContent="Giá sách..." />
             </Grid>
         </telerik:GroupBox>
@@ -225,7 +226,7 @@
             <telerik:RadGridView.Columns>
                 <telerik:GridViewSelectColumn />
 
-                <telerik:GridViewDataColumn Header="Tên sách" Width="*" IsReadOnly="True"
+                <telerik:GridViewDataColumn Header="Tên sách" Width="*"
                                             DataMemberBinding="{Binding Ten, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <telerik:GridViewComboBoxColumn Header="Loại Sách" ItemsSource="{Binding BookTypes}"

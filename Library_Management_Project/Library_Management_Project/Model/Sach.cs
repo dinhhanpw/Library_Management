@@ -20,6 +20,7 @@ namespace Library_Management_Project.Model
         public Sach()
         {
             this.CTPhieuMuons = new HashSet<CTPhieuMuon>();
+            BiAn = false;
         }
 
         static Sach()
