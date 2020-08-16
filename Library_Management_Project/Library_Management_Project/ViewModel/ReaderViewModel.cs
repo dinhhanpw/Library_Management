@@ -23,8 +23,8 @@ namespace Library_Management_Project.ViewModel
             get { return selectedReader; }
             set
             {
-                if (value == null) return;
                 selectedReader = value;
+                if (value == null) return;
 
                 // thay đổi dữ liệu trên biểu mẫu thông tin đọc giả
                 Holder.Ten = SelectedReader.Ten;
@@ -182,15 +182,7 @@ namespace Library_Management_Project.ViewModel
                 Readers.Remove(SelectedReader);
                 // lưu các thay đổi
                 DataProvider.Instance.DataBase.SaveChanges();
-                //foreach (CTPhieuMuon receiptInfo in ReceiptInfos)
-                //{
-                //    if (receiptInfo.IdDocGia == SelectedReader.Id)
-                //    {
-                //        receiptInfo.BiAn = true;
-                //        Receipts.Remove(receiptInfo);
-                //    }
-
-                //}
+                
             }
         }
 

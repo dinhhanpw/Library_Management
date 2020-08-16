@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Library_Management_Project.ViewModel
@@ -19,8 +20,8 @@ namespace Library_Management_Project.ViewModel
             get { return selectedBook; }
             set
             {
-                if (value == null) return;
                 selectedBook = value;
+                if (value == null) return;
 
                 Holder.Ten = SelectedBook.Ten;
                 Holder.IdLoai = SelectedBook.IdLoai;
@@ -52,6 +53,48 @@ namespace Library_Management_Project.ViewModel
             Holder.IdLoai = BookTypes[0].Id;
             AddCommand = new RelayCommand<Sach>(CanAdd, OnAdd);
             EditCommand = new RelayCommand<Sach>(CanEdit, OnEdit);
+            DeleteCommand = new RelayCommand<Sach>(CanDelete, OnDelete);
+        }
+
+        /// <summary>
+        /// xóa thông tin sách khỏi danh sách
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnDelete(Sach obj)
+        {
+            // hiển thị thông báo để xác nhận xóa
+            MessageBoxResult result =
+                MessageBox.Show("Các thông tin liên quan đến sách này cũng sẽ bị xóa, bạn có chấp nhận?",
+                "Xóa Thông Tin Sách",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                ObservableCollection<CTPhieuMuon> ReceiptInfos = DataProvider.Instance.BorrowReceiptInfos;
+
+                foreach (CTPhieuMuon receiptInfo in SelectedBook.CTPhieuMuons)
+                {
+                    // ẩn thông tin sách mượn
+                    receiptInfo.BiAn = true;
+                    ReceiptInfos.Remove(receiptInfo);
+                }
+
+                // ẩn thông tin đọc giả
+                SelectedBook.BiAn = true;
+                Books.Remove(SelectedBook);
+                // lưu các thay đổi
+                DataProvider.Instance.DataBase.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// kiểm tra những điều kiện để cho phép xóa thông tin sách
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private bool CanDelete(Sach obj)
+        {
+            return SelectedBook != null;
         }
 
         /// <summary>
