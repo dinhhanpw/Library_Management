@@ -43,3 +43,6 @@ D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\MainResource.baml
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\bin\Debug\FluentValidation.dll
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\bin\Debug\FluentValidation.xml
+D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\Dialog\ExportReportDialog.g.cs
+D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\Dialog\ExportReportDialog.baml
+D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\bin\Debug\Aspose.Cells.dll
