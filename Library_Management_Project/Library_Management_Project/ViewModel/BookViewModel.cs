@@ -51,6 +51,36 @@ namespace Library_Management_Project.ViewModel
             Holder = new Sach();
             Holder.IdLoai = BookTypes[0].Id;
             AddCommand = new RelayCommand<Sach>(CanAdd, OnAdd);
+            EditCommand = new RelayCommand<Sach>(CanEdit, OnEdit);
+        }
+
+        /// <summary>
+        /// chỉnh sửa thông tin sách
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnEdit(Sach obj)
+        {
+            // sao chép thông tin
+            SelectedBook.Ten = Holder.Ten;
+            SelectedBook.NgayNhap = Holder.NgayNhap;
+            SelectedBook.IdLoai = Holder.IdLoai;
+            SelectedBook.TacGia = Holder.TacGia;
+            SelectedBook.NhaXB = Holder.NhaXB;
+            SelectedBook.NamXB = Holder.NamXB;
+            SelectedBook.SoLuong = Holder.SoLuong;
+            SelectedBook.Gia = Holder.Gia;
+
+            DataProvider.Instance.DataBase.SaveChanges();
+        }
+
+        /// <summary>
+        /// kiểm tra những điều kiện để cho phép chỉnh sửa thông tin sách
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private bool CanEdit(Sach obj)
+        {
+            return selectedBook != null && !Holder.HasErrors;
         }
 
         /// <summary>
