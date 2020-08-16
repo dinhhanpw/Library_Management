@@ -47,6 +47,18 @@
                         <Setter Property="Margin" Value="5 15 5 0"/>
                         <Setter Property="VerticalAlignment" Value="Center"/>
                     </Style>
+                    <Style TargetType="telerik:RadMaskedNumericInput" BasedOn="{StaticResource RadMaskedNumericInputStyle}" >
+                        <Setter Property="Margin" Value="5 15 5 0"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Width" Value="150"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    </Style>
+                    <Style TargetType="telerik:RadMaskedCurrencyInput" BasedOn="{StaticResource RadMaskedCurrencyInputStyle}" >
+                        <Setter Property="Margin" Value="5 15 5 0"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Width" Value="150"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    </Style>
                     <Style TargetType="telerik:RadDatePicker" >
                         <Setter Property="Margin" Value="5 15 0 0"/>
                         <Setter Property="Width" Value="150"/>
@@ -113,21 +125,27 @@
                                              WatermarkContent="Nhà xuất bản..."/>
 
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="Năm xuất bản"/>
-                <telerik:RadWatermarkTextBox AdditionalContent="aaa"  Grid.Column="5" Grid.Row="1"
-                                             WatermarkContent="Năm xuất bản..."
+                <telerik:RadMaskedNumericInput Grid.Column="5" Grid.Row="1"
+                                               Mask="#4.0" TextMode="PlainText"
+                                               EmptyContent="Năm xuất bản..."
+                                               Value="{Binding NamXB}"
                                         Validation.ErrorTemplate="{StaticResource ErrorInfoTemplate}"
                                        />
 
                 <TextBlock Grid.Row="2" Text="Số lượng"/>
-                <telerik:RadWatermarkTextBox  Grid.Column="1" Grid.Row="2"
-                         WatermarkContent="Số lượng..."
+                <telerik:RadMaskedNumericInput  Grid.Column="1" Grid.Row="2"
+                         EmptyContent="Số lượng..." Mask="#6.0"
+                         TextMode="PlainText"
                          Validation.ErrorTemplate="{StaticResource ErrorInfoTemplate}"
-                         Text="{Binding Ten, Mode=TwoWay,
+                         Value="{Binding SoLuong, Mode=TwoWay,
                     UpdateSourceTrigger=LostFocus,ValidatesOnNotifyDataErrors=True}"
                          />
 
                 <TextBlock Grid.Column="2" Grid.Row="2" Text="Giá sách"/>
-                <telerik:RadWatermarkTextBox Grid.Column="3" Grid.Row="2" WatermarkContent="Giá sách..." />
+                <telerik:RadMaskedCurrencyInput Grid.Column="3" Grid.Row="2"
+                                                Mask="#8.0" TextMode="PlainText"
+                                                Value="{Binding Gia}"
+                                                EmptyContent="Giá sách..." />
             </Grid>
         </telerik:GroupBox>
 
