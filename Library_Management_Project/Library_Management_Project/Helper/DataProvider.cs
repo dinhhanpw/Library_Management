@@ -13,7 +13,7 @@ namespace Library_Management_Project.Helper
         public ObservableCollection<DocGia> Readers { get; private set; }
         public ObservableCollection<Sach> Books { get; private set; }
         public ObservableCollection<LoaiDocGia> ReaderTypes { get; set; }
-        public ObservableCollection<LoaiSach> BookType { get; set; }
+        public ObservableCollection<LoaiSach> BookTypes { get; set; }
         public ObservableCollection<PhieuMuon> BorrowReceipts { get; set; }
         public ObservableCollection<CTPhieuMuon> BorrowReceiptInfos { get; set; }
         public QuyDinh Rule { get; set; }
@@ -24,7 +24,7 @@ namespace Library_Management_Project.Helper
             Readers = new ObservableCollection<DocGia>(DataBase.DocGias.Where(reader => reader.BiAn == false));
             Books = new ObservableCollection<Sach>(DataBase.Saches.Where(book => book.BiAn == false));
             ReaderTypes = new ObservableCollection<LoaiDocGia>(DataBase.LoaiDocGias.Where(type => type.BiAn == false));
-            BookType = new ObservableCollection<LoaiSach>(DataBase.LoaiSaches.Where(type => type.BiAn == false));
+            BookTypes = new ObservableCollection<LoaiSach>(DataBase.LoaiSaches.Where(type => type.BiAn == false));
             BorrowReceipts = new ObservableCollection<PhieuMuon>(DataBase.PhieuMuons.Where(receipt => receipt.BiAn == false));
             //foreach(PhieuMuon receipt in BorrowReceipts)
             //{

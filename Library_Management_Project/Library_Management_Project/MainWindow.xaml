@@ -29,6 +29,9 @@
             <view:ReaderManagementView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:BookViewModel}">
+            <view:BookManagementView/>
+        </DataTemplate>
        
 
     </Window.Resources>

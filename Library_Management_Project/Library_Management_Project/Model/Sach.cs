@@ -9,10 +9,12 @@
 
 namespace Library_Management_Project.Model
 {
+    using Library_Management_Project.Helper;
+    using Library_Management_Project.Helper.Validator;
     using System;
     using System.Collections.Generic;
     
-    public partial class Sach
+    public partial class Sach : ValidatableBase<Sach>
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sach()
@@ -20,13 +22,18 @@ namespace Library_Management_Project.Model
             this.CTPhieuMuons = new HashSet<CTPhieuMuon>();
         }
     
+        static Sach()
+        {
+            validator = new BookValidator();
+        }
+
         public int Id { get; set; }
         public string Ten { get; set; }
         public Nullable<int> IdLoai { get; set; }
         public string TacGia { get; set; }
         public Nullable<int> NamXB { get; set; }
         public string NhaXB { get; set; }
-        public Nullable<System.DateTime> NgayNhap { get; set; }
+        public Nullable<DateTime> NgayNhap { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public Nullable<int> Gia { get; set; }
         public Nullable<bool> BiAn { get; set; }
