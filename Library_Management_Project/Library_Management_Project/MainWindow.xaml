@@ -33,7 +33,10 @@
         <DataTemplate DataType="{x:Type viewModel:BookViewModel}">
             <view:BookManagementView/>
         </DataTemplate>
-       
+
+        <DataTemplate DataType="{x:Type viewModel:BorrowReceiptViewModel}">
+            <view:BorrowReceiptManagement/>
+        </DataTemplate>
 
     </Window.Resources>
     <Window.DataContext>

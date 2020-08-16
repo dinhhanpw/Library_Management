@@ -48,3 +48,5 @@ D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\bin\Debug\Aspose.Cells.dll
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\BookManagementView.g.cs
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\BookManagementView.baml
+D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\BorrowReceiptManagement.g.cs
+D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\BorrowReceiptManagement.baml

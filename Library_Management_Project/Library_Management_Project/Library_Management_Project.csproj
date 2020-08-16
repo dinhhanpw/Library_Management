@@ -92,10 +92,14 @@
     <Compile Include="Helper\Validator\ReaderValidator.cs" />
     <Compile Include="Helper\Validator\ValidationHelper.cs" />
     <Compile Include="ViewModel\BookViewModel.cs" />
+    <Compile Include="ViewModel\BorrowReceiptViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ReaderViewModel.cs" />
     <Compile Include="View\BookManagementView.xaml.cs">
       <DependentUpon>BookManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BorrowReceiptManagement.xaml.cs">
+      <DependentUpon>BorrowReceiptManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReaderManagementView.xaml.cs">
       <DependentUpon>ReaderManagementView.xaml</DependentUpon>
@@ -121,6 +125,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\BookManagementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BorrowReceiptManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

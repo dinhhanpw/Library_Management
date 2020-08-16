@@ -1,0 +1,278 @@
+﻿<UserControl x:Class="Library_Management_Project.View.BorrowReceiptManagement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Library_Management_Project.View"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="telerik:GroupBox" >
+                <Setter Property="Margin" Value="10 10 10 0"/>
+                <Setter Property="BorderThickness" Value="0 1 0 0"/>
+                <Setter Property="BorderBrush" Value="#25A0DA"/>
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontSize="12" FontWeight="Bold" Foreground="Gray"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <telerik:GroupBox
+            Header="Thông Tin Phiếu Mượn">
+            <Grid>
+                <Grid.Resources>
+                    
+                    <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+                        <Setter Property="Margin" Value="5 15 0 0"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+
+                    </Style>
+
+                    <Style TargetType="telerik:RadDatePicker" >
+                        <Setter Property="Margin" Value="5 15 0 0"/>
+                        <Setter Property="Width" Value="150"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="CalendarStyle" Value="{DynamicResource RadCalendarStyle}"/>
+                    </Style>
+
+
+                    <Style TargetType="telerik:RadMultiColumnComboBox" BasedOn="{StaticResource RadMultiColumnComboBoxStyle}">
+                        <Setter Property="Margin" Value="5 20 0 0"/>
+                        <Setter Property="CloseDropDownAfterSelectionInput" Value="True"/>
+                        <Setter Property="AutoCompleteMode" Value="SuggestAppend"/>
+                        <Setter Property="DeferTextChange" Value="False"/>
+                        <Setter Property="SearchMode" Value="MatchAnyTerm"/>
+                        <Setter Property="MatchCase" Value="False"/>
+                    </Style>
+
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+                <TextBlock Text="Họ và tên" Style="{StaticResource TextBlockStyle}"/>
+                <telerik:RadMultiColumnComboBox Grid.Row="0" Grid.Column="1" Margin="5 15 0 0"
+                                                NullText="Họ và tên..."
+                                                Name="namelala"
+                                                SelectionMode="Single"
+                                                
+                                                SelectedValuePath="Id"
+                                                DisplayMemberPath="Ten">
+                    <telerik:RadMultiColumnComboBox.ItemsSourceProvider>
+                        <telerik:GridViewItemsSourceProvider ItemsSource="{Binding Readers}"
+                                                             IsReadOnly="True"
+                                                             AutoGenerateColumns="False">
+                            <telerik:GridViewItemsSourceProvider.Columns>
+                                
+                                <telerik:GridViewDataColumn Header="Họ Tên"
+                                            DataMemberBinding="{Binding Ten}"/>
+
+                                <telerik:GridViewDataColumn Header="Loại" 
+                                            DataMemberBinding="{Binding IdLoai.Ten}"/>
+
+                                <telerik:GridViewDataColumn Header="Ngày Sinh" 
+                                            DataMemberBinding="{Binding NgaySinh}" DataFormatString="MM-dd-yyyy"/>
+
+                                <telerik:GridViewDataColumn Header="Địa Chỉ" Width="*"
+                                            DataMemberBinding="{Binding DiaChi}"/>
+
+                                <telerik:GridViewDataColumn Header="Ngày Lập Thẻ" 
+                                            DataMemberBinding="{Binding NgayLap}" DataFormatString="MM-dd-yyyy"/>
+
+                            </telerik:GridViewItemsSourceProvider.Columns>
+                        </telerik:GridViewItemsSourceProvider>
+                    </telerik:RadMultiColumnComboBox.ItemsSourceProvider>
+                </telerik:RadMultiColumnComboBox>
+
+                <TextBlock Grid.Row="1" Text="Danh sách sách mượn" Style="{StaticResource TextBlockStyle}"/>
+                <telerik:RadMultiColumnComboBox Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1"
+                                                Name="bookList"
+                                                NullText="Sách mượn..."
+                                                SelectionMode="Multiple"
+                                                DisplayMemberPath="Ten"
+                                                >
+                    <telerik:RadMultiColumnComboBox.ItemsSourceProvider>
+                        <telerik:GridViewItemsSourceProvider ItemsSource="{Binding Books}"
+                                                             AutoGenerateColumns="False"
+                                                             IsReadOnly="True">
+                            <telerik:GridViewItemsSourceProvider.Columns>
+                                <telerik:GridViewDataColumn Header="Tên Sách" 
+                                            DataMemberBinding="{Binding Ten}"/>
+
+                                <telerik:GridViewDataColumn Header="Loại Sách"
+                                            DataMemberBinding="{Binding IdLoai.Ten}"/>
+
+                                <telerik:GridViewDataColumn Header="Tác Giả"
+                                            DataMemberBinding="{Binding TacGia}"/>
+
+                                <telerik:GridViewDataColumn Header="Nhà Xuất Bản" Width="*"
+                                            DataMemberBinding="{Binding NhaXB}"/>
+
+                                <telerik:GridViewDataColumn Header="Năm Xuất Bản" 
+                                            DataMemberBinding="{Binding NamXB}"/>
+
+                                <telerik:GridViewDataColumn Header="Số Lượng" 
+                                            DataMemberBinding="{Binding SoLuong}"/>
+
+                            </telerik:GridViewItemsSourceProvider.Columns>
+                        </telerik:GridViewItemsSourceProvider>
+                    </telerik:RadMultiColumnComboBox.ItemsSourceProvider>
+                </telerik:RadMultiColumnComboBox>
+
+                <telerik:RadGridView Margin="0 10 0 0" Grid.Row="2" Grid.ColumnSpan="4"
+                             IsReadOnly="True"
+                             RowIndicatorVisibility="Collapsed"
+                             ShowSearchPanel="False"
+                             CanUserSearch="True"
+                             ItemsSource="{Binding ElementName=bookList, Path=SelectedItems}"
+                             AutoGenerateColumns="False"
+                             GroupRenderMode="Flat"
+                             CanUserFreezeColumns="False"
+                             CanUserSortColumns="True">
+                    <telerik:RadGridView.Columns>
+                        
+                        <telerik:GridViewDataColumn Header="Tên Sách" 
+                                            DataMemberBinding="{Binding Ten}"/>
+
+                        <telerik:GridViewDataColumn Header="Loại Sách"
+                                            DataMemberBinding="{Binding LoaiSach.Ten}"/>
+
+                        <telerik:GridViewDataColumn Header="Tác Giả"
+                                            DataMemberBinding="{Binding TacGia}"/>
+
+                        <telerik:GridViewDataColumn Header="Nhà Xuất Bản" Width="*"
+                                            DataMemberBinding="{Binding NhaXB}"/>
+
+                        <telerik:GridViewDataColumn Header="Năm Xuất Bản" 
+                                            DataMemberBinding="{Binding NamXB}"/>
+
+                        <telerik:GridViewDataColumn Header="Số Lượng" 
+                                            DataMemberBinding="{Binding SoLuong}"/>
+                        
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
+
+                <TextBlock Grid.Column="2" Text="Ngày mượn sách" Margin="10 15 0 0"
+                           Style="{StaticResource TextBlockStyle}"/>
+                <telerik:RadDatePicker Grid.Column="3"
+                                       Validation.ErrorTemplate="{StaticResource ErrorInfoTemplate}"
+                                       SelectedValue="{Binding NgayMuon}"
+                                       DateTimeWatermarkContent="Ngày mượn..." />
+
+
+
+            </Grid>
+        </telerik:GroupBox>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <StackPanel.Resources>
+
+                <Style TargetType="telerik:RadButton" BasedOn="{StaticResource RadButtonStyle}">
+                    <Setter Property="Margin" Value="5 5 5 5"/>
+                    <Setter Property="Width" Value="120"/>
+                    <Setter Property="Height" Value="35"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="BorderBrush" Value="#25A0DA"/>
+                </Style>
+
+            </StackPanel.Resources>
+
+            <telerik:RadButton  Command="{Binding AddCommand}"
+                                    CommandParameter="{Binding Holder}"
+                                    >
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                    <telerik:RadGlyph Glyph="&#xe12e;" FontSize="25" />
+                    <TextBlock Text="Thêm" Margin="10 0 0 0" VerticalAlignment="Center"/>
+
+                </StackPanel>
+            </telerik:RadButton>
+
+            <telerik:RadButton  Command="{Binding EditCommand}"
+                                    CommandParameter="{Binding ElementName=radGridView, Path=SelectedItem}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                    <telerik:RadGlyph Glyph="&#xe64a;" FontSize="25" />
+                    <TextBlock Text="Sửa" Margin="10 0 0 0" VerticalAlignment="Center"/>
+
+                </StackPanel>
+            </telerik:RadButton>
+
+            <telerik:RadButton>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                    <telerik:RadGlyph Glyph="&#xe10c;" FontSize="25" />
+                    <TextBlock Text="Xóa" Margin="10 0 0 0" VerticalAlignment="Center"/>
+
+                </StackPanel>
+            </telerik:RadButton>
+
+            <telerik:RadButton Command="{Binding ExportCommand}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                    <telerik:RadGlyph Glyph="&#xe665;" FontSize="25" />
+                    <TextBlock Text="Xuất Báo Cáo" Margin="10 0 0 0" VerticalAlignment="Center"/>
+
+                </StackPanel>
+            </telerik:RadButton>
+
+        </StackPanel>
+
+        <telerik:RadGridView Margin="5,5,5,5" Grid.Row="2"
+                             RowIndicatorVisibility="Collapsed"
+                             ShowSearchPanel="False"
+                             NewRowPosition="Bottom"
+                             CanUserDeleteRows="True"
+                             CanUserSearch="True"
+                             ItemsSource="{Binding BorrowReceipts}"
+                             SelectedItem="{Binding SelectedReader,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             AutoGenerateColumns="False"
+                             GroupRenderMode="Flat"
+                             CanUserFreezeColumns="False"
+                             CanUserSortColumns="True">
+
+            <telerik:EventToCommandBehavior.EventBindings>
+                <telerik:EventBinding EventName="RowEditEnded" 
+                                      PassEventArgsToCommand="True"
+                                      Command="{Binding EditOnTableDataCommand}"/>
+            </telerik:EventToCommandBehavior.EventBindings>
+
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewSelectColumn />
+
+                <telerik:GridViewDataColumn Header="Họ Tên" Width="*"
+                                            DataMemberBinding="{Binding DocGia.Ten, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <telerik:GridViewDataColumn Header="Ngày Mượn" Width="*"
+                                            DataMemberBinding="{Binding NgayMuon , UpdateSourceTrigger=PropertyChanged}" DataFormatString="MM-dd-yyyy"/>
+
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+    </Grid>
+</UserControl>
