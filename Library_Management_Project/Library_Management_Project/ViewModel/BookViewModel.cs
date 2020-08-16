@@ -1,4 +1,6 @@
-﻿using Library_Management_Project.Helper;
+﻿using Aspose.Cells;
+using Library_Management_Project.Dialog;
+using Library_Management_Project.Helper;
 using Library_Management_Project.Model;
 using System;
 using System.Collections.Generic;
@@ -54,6 +56,93 @@ namespace Library_Management_Project.ViewModel
             AddCommand = new RelayCommand<Sach>(CanAdd, OnAdd);
             EditCommand = new RelayCommand<Sach>(CanEdit, OnEdit);
             DeleteCommand = new RelayCommand<Sach>(CanDelete, OnDelete);
+            ExportCommand = new RelayCommand<Object>(obj => true, OnExport);
+        }
+
+        private void OnExport(object obj)
+        {
+            ExportReportDialog dialog = new ExportReportDialog();
+
+            // mở hộp thoại để đặt các thông tin cần thiết
+            if (dialog.ShowDialog() == true)
+            {
+                Workbook workbook = new Workbook();
+                Worksheet worksheet = workbook.Worksheets[0];
+                // lấy danh sách đọc giả theo tiêu chí đã chọn
+                List<Sach> bookList =
+                    new List<Sach>(DataProvider.Instance.DataBase.Saches.Where(reader => reader.NgayNhap >= dialog.From && reader.NgayNhap <= dialog.To));
+                int row = 3;
+
+                SetHeader(worksheet);
+
+                // lưu thông tin đọc giả vào tập tin excel
+                foreach (Sach book in bookList)
+                {
+                    SetValueOnRowWorksheet(worksheet, book, row++);
+                }
+
+                workbook.Save(dialog.FileName, SaveFormat.Xlsx);
+            }
+        }
+
+        /// <summary>
+        /// đặt các tiêu đề cột trong tập tin excel
+        /// </summary>
+        /// <param name="worksheet"></param>
+        /// <param name="row"></param>
+        private void SetHeader(Worksheet worksheet, int row = 2)
+        {
+            char startCol = 'A';
+
+            Cell cell = worksheet.Cells[$"{startCol}{row}"];
+            cell.PutValue("STT");
+            cell = worksheet.Cells[$"{(char)(startCol + 1)}{row}"];
+            cell.PutValue("Tên Sách");
+            cell = worksheet.Cells[$"{(char)(startCol + 2)}{row}"];
+            cell.PutValue("Loại Sách");
+            cell = worksheet.Cells[$"{(char)(startCol + 3)}{row}"];
+            cell.PutValue("Ngày Nhập Sách");
+            cell = worksheet.Cells[$"{(char)(startCol + 4)}{row}"];
+            cell.PutValue("Tác Giả");
+            cell = worksheet.Cells[$"{(char)(startCol + 5)}{row}"];
+            cell.PutValue("Nhà Xuất Bản");
+            cell = worksheet.Cells[$"{(char)(startCol + 6)}{row}"];
+            cell.PutValue("Năm Xuất Bản");
+            cell = worksheet.Cells[$"{(char)(startCol + 7)}{row}"];
+            cell.PutValue("Số Lượng");
+            cell = worksheet.Cells[$"{(char)(startCol + 8)}{row}"];
+            cell.PutValue("Giá Sách");
+
+        }
+
+        /// <summary>
+        /// lưu một đối tượng sách vào một hàng của tập tin excel
+        /// </summary>
+        /// <param name="worksheet"></param>
+        /// <param name="reader"></param>
+        /// <param name="row"></param>
+        /// <param name="startCol"></param>
+        private void SetValueOnRowWorksheet(Worksheet worksheet, Sach reader, int row, char startCol = 'A')
+        {
+
+            Cell cell = worksheet.Cells[$"{(char)(startCol)}{row}"];
+            cell.PutValue(row - 2);
+            cell = worksheet.Cells[$"{(char)(startCol + 1)}{row}"];
+            cell.PutValue(reader.Ten);
+            cell = worksheet.Cells[$"{(char)(startCol + 2)}{row}"];
+            cell.PutValue(reader.LoaiSach.Ten);
+            cell = worksheet.Cells[$"{(char)(startCol + 3)}{row}"];
+            cell.PutValue(reader.NgayNhap.Value.ToString("MM/dd/yyyy"));
+            cell = worksheet.Cells[$"{(char)(startCol + 4)}{row}"];
+            cell.PutValue(reader.TacGia);
+            cell = worksheet.Cells[$"{(char)(startCol + 5)}{row}"];
+            cell.PutValue(reader.NhaXB);
+            cell = worksheet.Cells[$"{(char)(startCol + 6)}{row}"];
+            cell.PutValue(reader.NamXB);
+            cell = worksheet.Cells[$"{(char)(startCol + 7)}{row}"];
+            cell.PutValue(reader.SoLuong);
+            cell = worksheet.Cells[$"{(char)(startCol + 8)}{row}"];
+            cell.PutValue(reader.Gia);
         }
 
         /// <summary>
