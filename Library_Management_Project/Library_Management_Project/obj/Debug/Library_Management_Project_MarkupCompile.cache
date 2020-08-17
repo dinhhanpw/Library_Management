@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\
+d:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\
 Library_Management_Project
 none
 false
 DEBUG;TRACE
-D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\App.xaml
-6-1787076010
-2482335943
-33-1031447544
-27-1109185705
-Dialog\ExportReportDialog.xaml;MainResource.xaml;MainWindow.xaml;View\BookManagementView.xaml;View\BorrowReceiptManagement.xaml;View\ReaderManagementView.xaml;
+d:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\App.xaml
+7-1336647324
+2-95638413
+3628333059
+27-1432226260
+Dialog\ExportReportDialog.xaml;MainResource.xaml;MainWindow.xaml;View\BookManagementView.xaml;View\BorrowReceiptManagement.xaml;View\ReaderManagementView.xaml;View\ReturnManagementView.xaml;
 
-False
+True
 

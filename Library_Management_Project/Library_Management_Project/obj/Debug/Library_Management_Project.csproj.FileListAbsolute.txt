@@ -1,6 +1,5 @@
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\Library_Management_Project.csprojAssemblyReference.cache
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\App.g.cs
-D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\Library_Management_Project_Content.g.cs
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\Library_Management_Project_MarkupCompile.cache
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\bin\Debug\Library_Management_Project.exe.config
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\bin\Debug\Library_Management_Project.exe
@@ -50,3 +49,5 @@ D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\BookManagementView.baml
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\BorrowReceiptManagement.g.cs
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\BorrowReceiptManagement.baml
+D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\ReturnManagementView.g.cs
+D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\ReturnManagementView.baml

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\App.xaml
-6-1787076010
+71194493935
 2482335943
-34-1873806911
+36585853069
 27-1109185705
-Dialog\ExportReportDialog.xaml;MainResource.xaml;MainWindow.xaml;View\BookManagementView.xaml;View\BorrowReceiptManagement.xaml;View\ReaderManagementView.xaml;
+Dialog\ExportReportDialog.xaml;MainResource.xaml;MainWindow.xaml;View\BookManagementView.xaml;View\BorrowReceiptManagement.xaml;View\ReaderManagementView.xaml;View\ReturnManagementView.xaml;
 
 True
 
