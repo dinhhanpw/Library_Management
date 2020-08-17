@@ -11,9 +11,17 @@ namespace Library_Management_Project.Model
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class CTPhieuMuon
     {
+        public CTPhieuMuon()
+        {
+            BiAn = false;
+            BiMat = false;
+            TienPhat = 0;
+            NgayTra = null;
+        }
+
         public int IdPhieuMuon { get; set; }
         public int IdSach { get; set; }
         public Nullable<DateTime> NgayTra { get; set; }
@@ -21,7 +29,7 @@ namespace Library_Management_Project.Model
         public Nullable<int> TienPhat { get; set; }
         public string GhiChu { get; set; }
         public Nullable<bool> BiAn { get; set; }
-    
+
         public virtual PhieuMuon PhieuMuon { get; set; }
         public virtual Sach Sach { get; set; }
     }

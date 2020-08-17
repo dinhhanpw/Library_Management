@@ -20,6 +20,7 @@ namespace Library_Management_Project.Model
         public PhieuMuon()
         {
             this.CTPhieuMuons = new HashSet<CTPhieuMuon>();
+            BiAn = false;
         }
 
         static PhieuMuon()

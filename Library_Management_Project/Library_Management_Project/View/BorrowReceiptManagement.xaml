@@ -124,6 +124,7 @@
 
                 <telerik:RadGridView Margin="0 10 0 0" Grid.Row="2" Grid.ColumnSpan="4"
                              RowIndicatorVisibility="Collapsed"
+                                     EditTriggers="None"
                              ShowSearchPanel="False"
                              CanUserInsertRows="{Binding CanUserInsertRow}"
                              NewRowPosition="Bottom"
