@@ -42,6 +42,10 @@
             <view:ReturnManagementView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:RuleViewModel}">
+            <view:RuleManagementView/>
+        </DataTemplate>
+
     </Window.Resources>
     <Window.DataContext>
         <viewModel:MainViewModel/>

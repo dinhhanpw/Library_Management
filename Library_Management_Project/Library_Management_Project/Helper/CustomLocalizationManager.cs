@@ -58,13 +58,8 @@ namespace Library_Management_Project.Helper
                 case "GridViewFilterIsNotEmpty":
                     return "Khác trống";
                 case "GridViewGroupPanelText":
-                    return "Danh Sách Thông Tin";
-                case "GridViewGroupPanelTopTextGrouped":
-                    return "Gom nhóm theo";
-                case "GridViewSearchPanelTopText":
-                    return "Tìm kiếm";
-                case "GridViewColumnsSelectionButtonTooltip":
-                    return "Chọn cột";
+                    return "Thả tiêu đề cột vào đầy để gom nhóm";
+                
             }
             return base.GetStringOverride(key);
         }

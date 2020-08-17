@@ -97,6 +97,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ReaderViewModel.cs" />
     <Compile Include="ViewModel\ReturningBookViewModel.cs" />
+    <Compile Include="ViewModel\RuleViewModel.cs" />
     <Compile Include="View\BookManagementView.xaml.cs">
       <DependentUpon>BookManagementView.xaml</DependentUpon>
     </Compile>
@@ -108,6 +109,9 @@
     </Compile>
     <Compile Include="View\ReturnManagementView.xaml.cs">
       <DependentUpon>ReturnManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RuleManagementView.xaml.cs">
+      <DependentUpon>RuleManagementView.xaml</DependentUpon>
     </Compile>
     <Page Include="Dialog\ExportReportDialog.xaml">
       <SubType>Designer</SubType>
@@ -142,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ReturnManagementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RuleManagementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

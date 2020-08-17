@@ -52,3 +52,5 @@ D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\ReturnManagementView.g.cs
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\ReturnManagementView.baml
 D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\Library_Management_Project_Content.g.cs
+D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\RuleManagementView.g.cs
+D:\Document\GIT\Library_Management\Library_Management_Project\Library_Management_Project\obj\Debug\View\RuleManagementView.baml
