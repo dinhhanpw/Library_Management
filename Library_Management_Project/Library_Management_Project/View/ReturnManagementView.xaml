@@ -77,42 +77,13 @@
 
                 </Grid.RowDefinitions>
                 <TextBlock Text="Họ và tên" Style="{StaticResource TextBlockStyle}"/>
-                <telerik:RadMultiColumnComboBox Grid.Row="0" Grid.Column="1" Margin="5 15 0 0"
-                                                IsReadOnly="True"
-                                                Style="{StaticResource MultiColumnComboBoxStyle}"
-                                                Validation.ErrorTemplate="{StaticResource ErrorInfoTemplate}"
-                                                NullText="Họ và tên..."
-                                                Name="namelala"
-                                                SelectionMode="Single"
-                                                SelectedValue="{Binding Holder.IdDocGia}"
-                                                SelectedItem="{Binding SelectedReader, Mode=OneWayToSource}"
-                                                SelectedValuePath="Id"
-                                                DisplayMemberPath="Ten">
-                    <telerik:RadMultiColumnComboBox.ItemsSourceProvider>
-                        <telerik:GridViewItemsSourceProvider ItemsSource="{Binding Readers}"
-                                                             IsReadOnly="True"
-                                                             AutoGenerateColumns="False">
-                            <telerik:GridViewItemsSourceProvider.Columns>
+                <telerik:RadWatermarkTextBox Grid.Row="0" Grid.Column="1" Margin="5 15 0 0"
+                                             DataContext="{Binding ElementName=receiptInfoList, Path=SelectedItem}"
+                                             Text="{Binding DocGia.Ten, 
+                    Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                             WatermarkContent="Họ và tên..."/>
 
-                                <telerik:GridViewDataColumn Header="Họ Tên"
-                                            DataMemberBinding="{Binding Ten}"/>
 
-                                <telerik:GridViewDataColumn Header="Loại" 
-                                            DataMemberBinding="{Binding IdLoai.Ten}"/>
-
-                                <telerik:GridViewDataColumn Header="Ngày Sinh" 
-                                            DataMemberBinding="{Binding NgaySinh}" DataFormatString="MM-dd-yyyy"/>
-
-                                <telerik:GridViewDataColumn Header="Địa Chỉ" Width="*"
-                                            DataMemberBinding="{Binding DiaChi}"/>
-
-                                <telerik:GridViewDataColumn Header="Ngày Lập Thẻ" 
-                                            DataMemberBinding="{Binding NgayLap}" DataFormatString="MM-dd-yyyy"/>
-
-                            </telerik:GridViewItemsSourceProvider.Columns>
-                        </telerik:GridViewItemsSourceProvider>
-                    </telerik:RadMultiColumnComboBox.ItemsSourceProvider>
-                </telerik:RadMultiColumnComboBox>
 
                 <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="Danh sách đang sách mượn" Style="{StaticResource TextBlockStyle}"/>
                
@@ -123,7 +94,7 @@
                              ShowSearchPanel="False"
                              CanUserSearch="True"
                              SelectionMode="Multiple"
-                             ItemsSource="{Binding BorrowedBooks}"
+                             ItemsSource="{Binding BorrowReceiptInfos}"
                              AutoGenerateColumns="False"
                              GroupRenderMode="Flat"
                              CanUserFreezeColumns="False"
@@ -132,32 +103,32 @@
                     <telerik:EventToCommandBehavior.EventBindings>
                         <telerik:EventBinding EventName="RowEditEnded" 
                                       PassEventArgsToCommand="True"
-                                      Command="{Binding AddBorrowedBookCommand}"/>
+                                      Command="{Binding BorrowReceiptInfos}"/>
                     </telerik:EventToCommandBehavior.EventBindings>
 
                     <telerik:RadGridView.Columns>
                         <telerik:GridViewSelectColumn />
 
                         <telerik:GridViewDataColumn Header="Tên Sách"
-                                            DataMemberBinding="{Binding LoaiSach.Ten}"/>
+                                            DataMemberBinding="{Binding Sach.Ten}"/>
 
                         <telerik:GridViewDataColumn Header="Loại Sách"
-                                            DataMemberBinding="{Binding LoaiSach.Ten}"/>
+                                            DataMemberBinding="{Binding Sach.LoaiSach.Ten}"/>
 
                         <telerik:GridViewDataColumn Header="Tác Giả"
-                                            DataMemberBinding="{Binding TacGia}"/>
+                                            DataMemberBinding="{Binding Sach.TacGia}"/>
 
                         <telerik:GridViewDataColumn Header="Nhà Xuất Bản" Width="*"
-                                            DataMemberBinding="{Binding NhaXB}"/>
+                                            DataMemberBinding="{Binding Sach.NhaXB}"/>
 
                         <telerik:GridViewDataColumn Header="Năm Xuất Bản" 
-                                            DataMemberBinding="{Binding NamXB}"/>
+                                            DataMemberBinding="{Binding Sach.NamXB}"/>
 
                         <telerik:GridViewDataColumn Header="Mất Sách" 
-                                            DataMemberBinding="{Binding SoLuong}"/>
+                                            DataMemberBinding="{Binding BiMat}"/>
 
                         <telerik:GridViewDataColumn Header="Thành Tiền" 
-                                            DataMemberBinding="{Binding SoLuong}"/>
+                                            DataMemberBinding="{Binding TienPhat}"/>
 
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
@@ -166,7 +137,7 @@
                            Style="{StaticResource TextBlockStyle}"/>
                 <telerik:RadDatePicker Grid.Column="3"
                                        Validation.ErrorTemplate="{StaticResource ErrorInfoTemplate}"
-                                       SelectedValue="{Binding Holder.NgayMuon}"
+                                       SelectedValue="{Binding ReturningDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                        DateTimeWatermarkContent="Ngày trả..." />
 
 
@@ -188,7 +159,7 @@
 
             </StackPanel.Resources>
 
-            <telerik:RadButton Command="{Binding ExportCommand}"
+            <telerik:RadButton Command="{Binding ReturnCommand}"
                                CommandParameter="{Binding ElementName=bookList, Path=SelectedItems}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                 HorizontalAlignment="Center">
@@ -201,10 +172,10 @@
         </StackPanel>
 
         <telerik:RadGridView Margin="5,5,5,5" Grid.Row="2"
+                             Name="receiptInfoList"
+                             IsReadOnly="True"
                              RowIndicatorVisibility="Collapsed"
                              ShowSearchPanel="False"
-                             NewRowPosition="Bottom"
-                             CanUserDeleteRows="True"
                              CanUserSearch="True"
                              ItemsSource="{Binding BorrowReceipts}"
                              SelectedItem="{Binding SelectedReceipt,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
@@ -225,7 +196,19 @@
                 <telerik:GridViewDataColumn Header="Họ Tên" Width="*"
                                             DataMemberBinding="{Binding DocGia.Ten, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <telerik:GridViewDataColumn Header="Ngày Mượn" Width="*"
+                <telerik:GridViewDataColumn Header="Loại"
+                                            DataMemberBinding="{Binding DocGia.LoaiDocGia.Ten, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <telerik:GridViewDataColumn Header="Ngày Sinh"
+                                            DataMemberBinding="{Binding DocGia.NgaySinh, UpdateSourceTrigger=PropertyChanged}" DataFormatString="MM-dd-yyyy"/>
+
+                <telerik:GridViewDataColumn Header="Địa Chỉ"
+                                            DataMemberBinding="{Binding DocGia.DiaChi, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <telerik:GridViewDataColumn Header="Email"
+                                            DataMemberBinding="{Binding DocGia.Email, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <telerik:GridViewDataColumn Header="Ngày Mượn"
                                             DataMemberBinding="{Binding NgayMuon , UpdateSourceTrigger=PropertyChanged}" DataFormatString="MM-dd-yyyy"/>
 
             </telerik:RadGridView.Columns>

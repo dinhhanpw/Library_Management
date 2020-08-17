@@ -286,8 +286,20 @@
 
                 <telerik:GridViewDataColumn Header="Họ Tên" Width="*"
                                             DataMemberBinding="{Binding DocGia.Ten, UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <telerik:GridViewDataColumn Header="Loại"
+                                            DataMemberBinding="{Binding DocGia.LoaiDocGia.Ten, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <telerik:GridViewDataColumn Header="Ngày Mượn" Width="*"
+                <telerik:GridViewDataColumn Header="Ngày Sinh"
+                                            DataMemberBinding="{Binding DocGia.NgaySinh, UpdateSourceTrigger=PropertyChanged}" DataFormatString="MM-dd-yyyy"/>
+
+                <telerik:GridViewDataColumn Header="Địa Chỉ"
+                                            DataMemberBinding="{Binding DocGia.DiaChi, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <telerik:GridViewDataColumn Header="Email"
+                                            DataMemberBinding="{Binding DocGia.Email, UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <telerik:GridViewDataColumn Header="Ngày Mượn"
                                             DataMemberBinding="{Binding NgayMuon , UpdateSourceTrigger=PropertyChanged}" DataFormatString="MM-dd-yyyy"/>
 
             </telerik:RadGridView.Columns>

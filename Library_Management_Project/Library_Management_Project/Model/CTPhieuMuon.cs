@@ -9,10 +9,11 @@
 
 namespace Library_Management_Project.Model
 {
+    using Library_Management_Project.Helper;
     using System;
     using System.Collections.Generic;
 
-    public partial class CTPhieuMuon
+    public partial class CTPhieuMuon : BindableBase
     {
         public CTPhieuMuon()
         {
@@ -22,12 +23,29 @@ namespace Library_Management_Project.Model
             NgayTra = null;
         }
 
+        private bool? biMat;
+        private int? tienPhat;
+        private DateTime? ngayTra;
+
         public int IdPhieuMuon { get; set; }
         public int IdSach { get; set; }
-        public Nullable<DateTime> NgayTra { get; set; }
-        public Nullable<bool> BiMat { get; set; }
-        public Nullable<int> TienPhat { get; set; }
+        public Nullable<DateTime> NgayTra
+        {
+            get { return ngayTra; }
+            set { SetBindableProperty(ref ngayTra, value); }
+        }
+        public Nullable<bool> BiMat
+        {
+            get { return biMat; }
+            set { SetBindableProperty(ref biMat, value); }
+        }
+        public Nullable<int> TienPhat
+        {
+            get { return tienPhat; }
+            set { SetBindableProperty(ref tienPhat, value); }
+        }
         public string GhiChu { get; set; }
+        
         public Nullable<bool> BiAn { get; set; }
 
         public virtual PhieuMuon PhieuMuon { get; set; }
