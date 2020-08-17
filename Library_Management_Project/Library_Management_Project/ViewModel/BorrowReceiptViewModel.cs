@@ -1,6 +1,9 @@
-﻿using Library_Management_Project.Helper;
+﻿using Aspose.Cells;
+using Library_Management_Project.Dialog;
+using Library_Management_Project.Helper;
 using Library_Management_Project.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -115,6 +118,95 @@ namespace Library_Management_Project.ViewModel
             AddBorrowedBookCommand = new RelayCommand<GridViewRowEditEndedEventArgs>(arg => arg != null, OnAddBorrowedBook);
             AddCommand = new RelayCommand<PhieuMuon>(CanAdd, OnAdd);
             DeleteCommand = new RelayCommand<PhieuMuon>(CanDelete, OnDelete);
+            ExportCommand = new RelayCommand<Object>(obj => true, OnExport);
+
+        }
+
+        /// <summary>
+        /// xuất thông tin phiếu mượn đến tập tin excel
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnExport(object obj)
+        {
+            ExportReportDialog dialog = new ExportReportDialog();
+
+            // mở hộp thoại để đặt các thông tin cần thiết
+            if (dialog.ShowDialog() == true)
+            {
+                Workbook workbook = new Workbook();
+                Worksheet worksheet = workbook.Worksheets[0];
+                // lấy danh sách đọc giả theo tiêu chí đã chọn
+                List<PhieuMuon> bookList =
+                    new List<PhieuMuon>(DataProvider.Instance.DataBase.PhieuMuons.Where(reader => reader.NgayMuon >= dialog.From && reader.NgayMuon <= dialog.To));
+                int row = 3;
+
+                SetHeader(worksheet);
+
+                // lưu thông tin phiếu mượn vào tập tin excel
+                foreach (PhieuMuon receipt in bookList)
+                {
+                    foreach (CTPhieuMuon receiptInfo in receipt.CTPhieuMuons)
+                        SetValueOnRowWorksheet(worksheet, receiptInfo, row++);
+                }
+
+                workbook.Save(dialog.FileName, SaveFormat.Xlsx);
+            }
+        }
+
+        /// <summary>
+        /// đặt các tiêu đề cột trong tập tin excel
+        /// </summary>
+        /// <param name="worksheet"></param>
+        /// <param name="row"></param>
+        private void SetHeader(Worksheet worksheet, int row = 2)
+        {
+            char startCol = 'A';
+
+            Cell cell = worksheet.Cells[$"{startCol}{row}"];
+            cell.PutValue("STT");
+            cell = worksheet.Cells[$"{(char)(startCol + 1)}{row}"];
+            cell.PutValue("Tên Đọc Giả");
+            cell = worksheet.Cells[$"{(char)(startCol + 2)}{row}"];
+            cell.PutValue("Ngày Mượn");
+            cell = worksheet.Cells[$"{(char)(startCol + 3)}{row}"];
+            cell.PutValue("Tên Sách");
+            cell = worksheet.Cells[$"{(char)(startCol + 4)}{row}"];
+            cell.PutValue("Loại Sách");
+            cell = worksheet.Cells[$"{(char)(startCol + 5)}{row}"];
+            cell.PutValue("Tác Giả");
+            cell = worksheet.Cells[$"{(char)(startCol + 6)}{row}"];
+            cell.PutValue("Nhà Xuất Bản");
+            cell = worksheet.Cells[$"{(char)(startCol + 7)}{row}"];
+            cell.PutValue("Năm Xuất Bản");
+
+        }
+
+        /// <summary>
+        /// lưu thông tin phiếu mượn vào một hàng của tập tin excel
+        /// </summary>
+        /// <param name="worksheet"></param>
+        /// <param name="receiptInfo"></param>
+        /// <param name="row"></param>
+        /// <param name="startCol"></param>
+        private void SetValueOnRowWorksheet(Worksheet worksheet, CTPhieuMuon receiptInfo, int row, char startCol = 'A')
+        {
+            Cell cell = worksheet.Cells[$"{(char)(startCol)}{row}"];
+            cell.PutValue(row - 2);
+            cell = worksheet.Cells[$"{(char)(startCol + 1)}{row}"];
+            cell.PutValue(receiptInfo.PhieuMuon.DocGia.Ten);
+            cell = worksheet.Cells[$"{(char)(startCol + 2)}{row}"];
+            cell.PutValue(receiptInfo.PhieuMuon.NgayMuon.Value.ToString("MM/dd/yyyy"));
+            cell = worksheet.Cells[$"{(char)(startCol + 3)}{row}"];
+            cell.PutValue(receiptInfo.Sach.Ten);
+            cell = worksheet.Cells[$"{(char)(startCol + 4)}{row}"];
+            cell.PutValue(receiptInfo.Sach.LoaiSach.Ten);
+            cell = worksheet.Cells[$"{(char)(startCol + 5)}{row}"];
+            cell.PutValue(receiptInfo.Sach.TacGia);
+            cell = worksheet.Cells[$"{(char)(startCol + 6)}{row}"];
+            cell.PutValue(receiptInfo.Sach.NhaXB);
+            cell = worksheet.Cells[$"{(char)(startCol + 7)}{row}"];
+            cell.PutValue(receiptInfo.Sach.NamXB);
+
 
         }
 
