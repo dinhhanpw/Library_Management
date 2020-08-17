@@ -114,7 +114,50 @@ namespace Library_Management_Project.ViewModel
             Holder = new PhieuMuon();
             AddBorrowedBookCommand = new RelayCommand<GridViewRowEditEndedEventArgs>(arg => arg != null, OnAddBorrowedBook);
             AddCommand = new RelayCommand<PhieuMuon>(CanAdd, OnAdd);
+            DeleteCommand = new RelayCommand<PhieuMuon>(CanDelete, OnDelete);
 
+        }
+
+        /// <summary>
+        /// xóa thông tin phiếu mượn khỏi danh sách
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnDelete(PhieuMuon obj)
+        {
+            // hiển thị thông báo để xác nhận xóa
+            MessageBoxResult result =
+                MessageBox.Show("Các thông tin liên quan đến đọc giả này cũng sẽ bị xóa, bạn có chấp nhận?",
+                "Xóa Thông Tin Đọc Giả",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                ObservableCollection<CTPhieuMuon> ReceiptInfos = DataProvider.Instance.BorrowReceiptInfos;
+
+                // ẩn thông tin các sách mượn
+                foreach (CTPhieuMuon receiptInfo in SelectedReceipt.CTPhieuMuons)
+                {
+                    receiptInfo.BiAn = true;
+                    ReceiptInfos.Remove(receiptInfo);
+                }
+
+                // ẩn thông tin phiếu mượn
+                SelectedReceipt.BiAn = true;
+                BorrowReceipts.Remove(SelectedReceipt);
+
+                DataProvider.Instance.DataBase.SaveChanges();
+
+            }
+        }
+
+        /// <summary>
+        /// kiểm tra những điều kiện để cho phép xóa thông tin phiếu mượn
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private bool CanDelete(PhieuMuon obj)
+        {
+            return SelectedReceipt != null;
         }
 
         /// <summary>

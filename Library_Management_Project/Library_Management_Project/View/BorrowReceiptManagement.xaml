@@ -242,7 +242,7 @@
                 </StackPanel>
             </telerik:RadButton>
 
-            <telerik:RadButton>
+            <telerik:RadButton Command="{Binding DeleteCommand}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                 HorizontalAlignment="Center">
                     <telerik:RadGlyph Glyph="&#xe10c;" FontSize="25" />
