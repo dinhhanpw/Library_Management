@@ -58,6 +58,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TuoiToiThieuDG" Type="int" />
     <Property Name="TuoiToiDaDG" Type="int" />
+    <Property Name="ThoiHanThe" Type="int" />
     <Property Name="KhoangNamXBSach" Type="int" />
     <Property Name="SLSachMuonToiDa" Type="int" />
     <Property Name="SoNgayMuonToiDa" Type="int" />

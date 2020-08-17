@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QuanLiThuVienModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QuanLiThuVienModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CTPhieuMuon">
           <Key>
             <PropertyRef Name="IdPhieuMuon" />
@@ -63,6 +63,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TuoiToiThieuDG" Type="int" />
           <Property Name="TuoiToiDaDG" Type="int" />
+          <Property Name="ThoiHanThe" Type="int" />
           <Property Name="KhoangNamXBSach" Type="int" />
           <Property Name="SLSachMuonToiDa" Type="int" />
           <Property Name="SoNgayMuonToiDa" Type="int" />
@@ -174,8 +175,7 @@
             <End Role="Sach" EntitySet="Sach" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QuanLiThuVienModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -251,6 +251,7 @@
           <Property Name="TienPhatTreSach_Ngay" Type="Int32" />
           <Property Name="PhanTramGiaSach" Type="Int32" />
           <Property Name="ChiPhiSachMat" Type="Int32" />
+          <Property Name="ThoiHanThe" Type="Int32" />
         </EntityType>
         <EntityType Name="Sach">
           <Key>
@@ -422,6 +423,7 @@
           <EntitySetMapping Name="QuyDinhs">
             <EntityTypeMapping TypeName="QuanLiThuVienModel.QuyDinh">
               <MappingFragment StoreEntitySet="QuyDinh">
+                <ScalarProperty Name="ThoiHanThe" ColumnName="ThoiHanThe" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TuoiToiThieuDG" ColumnName="TuoiToiThieuDG" />
                 <ScalarProperty Name="TuoiToiDaDG" ColumnName="TuoiToiDaDG" />

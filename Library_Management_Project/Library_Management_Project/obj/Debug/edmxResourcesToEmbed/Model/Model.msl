@@ -59,6 +59,7 @@
     <EntitySetMapping Name="QuyDinhs">
       <EntityTypeMapping TypeName="QuanLiThuVienModel.QuyDinh">
         <MappingFragment StoreEntitySet="QuyDinh">
+          <ScalarProperty Name="ThoiHanThe" ColumnName="ThoiHanThe" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TuoiToiThieuDG" ColumnName="TuoiToiThieuDG" />
           <ScalarProperty Name="TuoiToiDaDG" ColumnName="TuoiToiDaDG" />

@@ -23,5 +23,6 @@ namespace Library_Management_Project.Model
         public Nullable<int> TienPhatTreSach_Ngay { get; set; }
         public Nullable<int> PhanTramGiaSach { get; set; }
         public Nullable<int> ChiPhiSachMat { get; set; }
+        public Nullable<int> ThoiHanThe { get; set; }
     }
 }

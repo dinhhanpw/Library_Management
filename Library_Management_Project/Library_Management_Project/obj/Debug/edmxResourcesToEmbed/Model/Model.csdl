@@ -72,6 +72,7 @@
     <Property Name="TienPhatTreSach_Ngay" Type="Int32" />
     <Property Name="PhanTramGiaSach" Type="Int32" />
     <Property Name="ChiPhiSachMat" Type="Int32" />
+    <Property Name="ThoiHanThe" Type="Int32" />
   </EntityType>
   <EntityType Name="Sach">
     <Key>
