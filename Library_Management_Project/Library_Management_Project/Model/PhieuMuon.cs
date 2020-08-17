@@ -9,20 +9,37 @@
 
 namespace Library_Management_Project.Model
 {
+    using Library_Management_Project.Helper;
+    using Library_Management_Project.Helper.Validator;
     using System;
     using System.Collections.Generic;
     
-    public partial class PhieuMuon
+    public partial class PhieuMuon : ValidatableBase<PhieuMuon>
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PhieuMuon()
         {
             this.CTPhieuMuons = new HashSet<CTPhieuMuon>();
         }
-    
+
+        static PhieuMuon()
+        {
+            validator = new BorrowReceiptValidator();
+        }
+
+        private int? idDocgia;
+        private DateTime? ngayMuon;
+
         public int Id { get; set; }
-        public Nullable<int> IdDocGia { get; set; }
-        public Nullable<System.DateTime> NgayMuon { get; set; }
+        public Nullable<int> IdDocGia {
+            get { return idDocgia; }
+            set { SetValidatableProperty(ref idDocgia, value, this); }
+        }
+        public Nullable<DateTime> NgayMuon
+        {
+            get { return ngayMuon; }
+            set { SetValidatableProperty(ref ngayMuon, value, this); }
+        }
         public Nullable<bool> BiAn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

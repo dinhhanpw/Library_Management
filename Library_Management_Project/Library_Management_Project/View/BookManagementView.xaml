@@ -210,7 +210,7 @@
                              NewRowPosition="Bottom"
                              CanUserDeleteRows="True"
                              CanUserSearch="True"
-                             x:Name="radGridView" ItemsSource="{Binding Books}"
+                             ItemsSource="{Binding Books}"
                              SelectedItem="{Binding SelectedBook,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              AutoGenerateColumns="False"
                              GroupRenderMode="Flat"

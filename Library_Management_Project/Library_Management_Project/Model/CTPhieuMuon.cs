@@ -16,7 +16,7 @@ namespace Library_Management_Project.Model
     {
         public int IdPhieuMuon { get; set; }
         public int IdSach { get; set; }
-        public Nullable<System.DateTime> NgayTra { get; set; }
+        public Nullable<DateTime> NgayTra { get; set; }
         public Nullable<bool> BiMat { get; set; }
         public Nullable<int> TienPhat { get; set; }
         public string GhiChu { get; set; }

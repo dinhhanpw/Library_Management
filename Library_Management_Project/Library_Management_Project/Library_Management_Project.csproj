@@ -89,6 +89,7 @@
     <Compile Include="Helper\RelayCommand.cs" />
     <Compile Include="Helper\ValidatableBase.cs" />
     <Compile Include="Helper\Validator\BookValidator.cs" />
+    <Compile Include="Helper\Validator\BorrowReceiptValidator.cs" />
     <Compile Include="Helper\Validator\ReaderValidator.cs" />
     <Compile Include="Helper\Validator\ValidationHelper.cs" />
     <Compile Include="ViewModel\BookViewModel.cs" />

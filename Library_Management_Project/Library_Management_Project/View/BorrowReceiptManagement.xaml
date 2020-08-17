@@ -35,7 +35,7 @@
         </Grid.RowDefinitions>
         <telerik:GroupBox
             Header="Thông Tin Phiếu Mượn">
-            <Grid>
+            <Grid >
                 <Grid.Resources>
                     
                     <Style TargetType="TextBlock" x:Key="TextBlockStyle">
@@ -52,7 +52,8 @@
                     </Style>
 
 
-                    <Style TargetType="telerik:RadMultiColumnComboBox" BasedOn="{StaticResource RadMultiColumnComboBoxStyle}">
+                    <Style TargetType="telerik:RadMultiColumnComboBox" x:Key="MultiColumnComboBoxStyle"
+                           BasedOn="{StaticResource RadMultiColumnComboBoxStyle}">
                         <Setter Property="Margin" Value="5 20 0 0"/>
                         <Setter Property="CloseDropDownAfterSelectionInput" Value="True"/>
                         <Setter Property="AutoCompleteMode" Value="SuggestAppend"/>
@@ -77,10 +78,13 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="Họ và tên" Style="{StaticResource TextBlockStyle}"/>
                 <telerik:RadMultiColumnComboBox Grid.Row="0" Grid.Column="1" Margin="5 15 0 0"
+                                                Style="{StaticResource MultiColumnComboBoxStyle}"
+                                                Validation.ErrorTemplate="{StaticResource ErrorInfoTemplate}"
                                                 NullText="Họ và tên..."
                                                 Name="namelala"
                                                 SelectionMode="Single"
-                                                
+                                                SelectedValue="{Binding Holder.IdDocGia}"
+                                                SelectedItem="{Binding SelectedReader, Mode=OneWayToSource}"
                                                 SelectedValuePath="Id"
                                                 DisplayMemberPath="Ten">
                     <telerik:RadMultiColumnComboBox.ItemsSourceProvider>
@@ -110,17 +114,47 @@
                 </telerik:RadMultiColumnComboBox>
 
                 <TextBlock Grid.Row="1" Text="Danh sách sách mượn" Style="{StaticResource TextBlockStyle}"/>
-                <telerik:RadMultiColumnComboBox Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1"
-                                                Name="bookList"
-                                                NullText="Sách mượn..."
-                                                SelectionMode="Multiple"
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Right"
+                                                Style="{StaticResource TextBlockStyle}"
+                                               Text="Số lượng sách có thể mượn"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="3" Margin="10 15 0 0"
+                                                Style="{StaticResource TextBlockStyle}"
+                                               Text="{Binding MaxNumberBook, Mode=OneWay}"/>
+
+                <telerik:RadGridView Margin="0 10 0 0" Grid.Row="2" Grid.ColumnSpan="4"
+                             RowIndicatorVisibility="Collapsed"
+                             ShowSearchPanel="False"
+                             CanUserInsertRows="{Binding CanUserInsertRow}"
+                             NewRowPosition="Bottom"
+                             CanUserSearch="True"
+                             ItemsSource="{Binding BorrowedBooks}"
+                             AutoGenerateColumns="False"
+                             GroupRenderMode="Flat"
+                             CanUserFreezeColumns="False"
+                             CanUserSortColumns="True">
+                    
+                    <telerik:EventToCommandBehavior.EventBindings>
+                        <telerik:EventBinding EventName="RowEditEnded" 
+                                      PassEventArgsToCommand="True"
+                                      Command="{Binding AddBorrowedBookCommand}"/>
+                    </telerik:EventToCommandBehavior.EventBindings>
+                    
+                    <telerik:RadGridView.Columns>
+
+                        <telerik:GridViewMultiColumnComboBoxColumn Header="Tên Sách"
+                                                ItemsSource="{Binding Books}"
+                                                CloseDropDownAfterSelectionInput="True"
+                                                DropDownWidth="800"
+                                                AutoGenerateColumns="False"
+                                                AutoCompleteMode="SuggestAppend"
+                                                DataMemberBinding="{Binding Id}"
+                                                SelectedValuePath="Id"
                                                 DisplayMemberPath="Ten"
                                                 >
-                    <telerik:RadMultiColumnComboBox.ItemsSourceProvider>
-                        <telerik:GridViewItemsSourceProvider ItemsSource="{Binding Books}"
-                                                             AutoGenerateColumns="False"
-                                                             IsReadOnly="True">
-                            <telerik:GridViewItemsSourceProvider.Columns>
+
+                            <telerik:GridViewMultiColumnComboBoxColumn.Columns>
+
                                 <telerik:GridViewDataColumn Header="Tên Sách" 
                                             DataMemberBinding="{Binding Ten}"/>
 
@@ -139,25 +173,8 @@
                                 <telerik:GridViewDataColumn Header="Số Lượng" 
                                             DataMemberBinding="{Binding SoLuong}"/>
 
-                            </telerik:GridViewItemsSourceProvider.Columns>
-                        </telerik:GridViewItemsSourceProvider>
-                    </telerik:RadMultiColumnComboBox.ItemsSourceProvider>
-                </telerik:RadMultiColumnComboBox>
-
-                <telerik:RadGridView Margin="0 10 0 0" Grid.Row="2" Grid.ColumnSpan="4"
-                             IsReadOnly="True"
-                             RowIndicatorVisibility="Collapsed"
-                             ShowSearchPanel="False"
-                             CanUserSearch="True"
-                             ItemsSource="{Binding ElementName=bookList, Path=SelectedItems}"
-                             AutoGenerateColumns="False"
-                             GroupRenderMode="Flat"
-                             CanUserFreezeColumns="False"
-                             CanUserSortColumns="True">
-                    <telerik:RadGridView.Columns>
-                        
-                        <telerik:GridViewDataColumn Header="Tên Sách" 
-                                            DataMemberBinding="{Binding Ten}"/>
+                            </telerik:GridViewMultiColumnComboBoxColumn.Columns>
+                        </telerik:GridViewMultiColumnComboBoxColumn>
 
                         <telerik:GridViewDataColumn Header="Loại Sách"
                                             DataMemberBinding="{Binding LoaiSach.Ten}"/>
@@ -181,7 +198,7 @@
                            Style="{StaticResource TextBlockStyle}"/>
                 <telerik:RadDatePicker Grid.Column="3"
                                        Validation.ErrorTemplate="{StaticResource ErrorInfoTemplate}"
-                                       SelectedValue="{Binding NgayMuon}"
+                                       SelectedValue="{Binding Holder.NgayMuon}"
                                        DateTimeWatermarkContent="Ngày mượn..." />
 
 
@@ -251,7 +268,7 @@
                              CanUserDeleteRows="True"
                              CanUserSearch="True"
                              ItemsSource="{Binding BorrowReceipts}"
-                             SelectedItem="{Binding SelectedReader,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             SelectedItem="{Binding SelectedReceipt,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                              AutoGenerateColumns="False"
                              GroupRenderMode="Flat"
                              CanUserFreezeColumns="False"
@@ -260,7 +277,7 @@
             <telerik:EventToCommandBehavior.EventBindings>
                 <telerik:EventBinding EventName="RowEditEnded" 
                                       PassEventArgsToCommand="True"
-                                      Command="{Binding EditOnTableDataCommand}"/>
+                                      />
             </telerik:EventToCommandBehavior.EventBindings>
 
             <telerik:RadGridView.Columns>
